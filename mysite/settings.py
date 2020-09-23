@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3_54z(tzq%2ln5pgbeb8_trk^0m^4o!eboqjg@1fy=r1hsjp-)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS =['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS =['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -76,8 +76,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'taishi',
+        'PASSWORD':'',
+        'HOST':'localhost',
+        'PORT':'',
     }
 }
 
@@ -100,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL= '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -120,3 +124,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+
+db_from_env=dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
